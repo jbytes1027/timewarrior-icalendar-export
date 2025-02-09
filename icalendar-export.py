@@ -3,6 +3,7 @@
 import sys
 import json
 from datetime import datetime
+from textwrap import wrap
 
 
 def parse_stdin():
@@ -38,7 +39,9 @@ def print_ical(intervals):
 
         print("BEGIN:VEVENT", end="\r\n")
         if "tags" in interval:
-            print("SUMMARY:" + ", ".join(interval["tags"] or ""), end="\r\n")
+            tags = ", ".join(interval["tags"])
+            wrapped_tags = "\r\n ".join(wrap(tags, width=60))
+            print("SUMMARY:" + wrapped_tags, end="\r\n")
         print("DTSTAMP:" + datetime.utcnow().strftime("%Y%m%dT%H%M%SZ"), end="\r\n")
         print("DTSTART:" + interval["start"], end="\r\n")
         print("DTEND:" + interval["end"], end="\r\n")
