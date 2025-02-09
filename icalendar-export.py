@@ -28,25 +28,25 @@ def parse_stdin():
 
 
 def print_ical(intervals):
-    print("BEGIN:VCALENDAR")
-    print("VERSION:2.0")
-    print("PRODID:f59afe55-e3c2-432b-a923-2d1b6bc2781c")
+    print("BEGIN:VCALENDAR", end="\r\n")
+    print("VERSION:2.0", end="\r\n")
+    print("PRODID:f59afe55-e3c2-432b-a923-2d1b6bc2781c", end="\r\n")
 
     for interval in intervals:
         if not "end" in interval:
             continue
 
-        print("BEGIN:VEVENT")
+        print("BEGIN:VEVENT", end="\r\n")
         if "tags" in interval:
-            print("SUMMARY:" + ", ".join(interval["tags"] or ""))
-        print("DTSTAMP:" + datetime.utcnow().strftime("%Y%m%dT%H%M%SZ"))
-        print("DTSTART:" + interval["start"])
-        print("DTEND:" + interval["end"])
-        print("UID:" + "TIMEWARRIOR" + interval["start"])
-        print("CLASS:PRIVATE")
-        print("END:VEVENT")
+            print("SUMMARY:" + ", ".join(interval["tags"] or ""), end="\r\n")
+        print("DTSTAMP:" + datetime.utcnow().strftime("%Y%m%dT%H%M%SZ"), end="\r\n")
+        print("DTSTART:" + interval["start"], end="\r\n")
+        print("DTEND:" + interval["end"], end="\r\n")
+        print("UID:" + "TIMEWARRIOR" + interval["start"], end="\r\n")
+        print("CLASS:PRIVATE", end="\r\n")
+        print("END:VEVENT", end="\r\n")
 
-    print("END:VCALENDAR")
+    print("END:VCALENDAR", end="\r\n")
 
 
 if __name__ == "__main__":
